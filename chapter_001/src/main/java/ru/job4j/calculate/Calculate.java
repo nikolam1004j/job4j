@@ -6,7 +6,7 @@ package ru.job4j.calculate;
 * @since 18.02.2019
 * @version 1
 */
-public class Calculate{
+public class Calculate {
 	
 	 
 	/**
@@ -22,7 +22,7 @@ public class Calculate{
      * Main.
      * @param args - args.
      */
-	public static void main(String [] args){
+	public static void main(String[]args) {
 		System.out.println("Hello world");
 	}
 }
