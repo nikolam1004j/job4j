@@ -15,7 +15,8 @@
 
     <modules>
         <module>chapter_001</module>
-    </modules>
+		<module>Departments</module>
+	</modules>
 
     <build>
         <plugins>
