@@ -17,6 +17,7 @@
         <module>chapter_001</module>
 		<module>Departments</module>
 		<module>Task5_1_4</module>
+		<module>TasksIterators</module>
 	</modules>
 
     <build>
