@@ -48,10 +48,14 @@ public class Departament implements Iterable<String> {
     public void add(String val) {
         String[] parts = val.split("\\\\");
         if (parts.length > 0) {
-            String result = "";
+            StringBuilder rs = new StringBuilder();
             for (String part : parts) {
-                result += result.isEmpty() ? part : "\\" + part;
-                tree.add(result);
+                if (rs.length() == 0) {
+                    rs.append(part);
+                } else {
+                    rs.append("\\").append(part);
+                }
+                tree.add(rs.toString());
             }
         }
     }
