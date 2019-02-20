@@ -1,6 +1,7 @@
 package deps;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
@@ -8,7 +9,7 @@ import java.util.TreeSet;
  * @author Николай Разилов
  * @since 19.02.2019
  */
-public class Departament {
+public class Departament implements Iterable<String> {
 
     private TreeSet<String> tree;
 
@@ -46,8 +47,13 @@ public class Departament {
      */
     public void add(String val) {
         String[] parts = val.split("\\\\");
-        tree.add(parts[0]);
-        tree.add(val);
+        if (parts.length > 0) {
+            String result = "";
+            for (String part : parts) {
+                result += result.isEmpty() ? part : "\\" + part;
+                tree.add(result);
+            }
+        }
     }
 
     /**
@@ -57,5 +63,22 @@ public class Departament {
     @Override
     public String toString() {
         return tree.toString();
+    }
+
+    /**
+     * Возвращает итератор для коллекции департаментов
+     * @return Итератор для коллекции департаментов (на основе TreeSet)
+     */
+    @Override
+    public Iterator<String> iterator() {
+        return tree.iterator();
+    }
+
+    /**
+     * Возвращает размер коллекции департаментов
+     * @return Размер коллекции департаментов
+     */
+    public int size() {
+        return tree.size();
     }
 }
