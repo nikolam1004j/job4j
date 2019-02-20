@@ -26,7 +26,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
      */
     private void skipNotEven() {
         if (carriage < ints.length) {
-            if((ints[carriage]& 1) == 1){
+            if ((ints[carriage] & 1) == 1) {
                 carriage++;
                 skipNotEven();
             }
@@ -40,7 +40,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        if(!hasNext()){
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         int result = ints[carriage++];
