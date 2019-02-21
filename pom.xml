@@ -19,6 +19,7 @@
 		<module>Task5_1_4</module>
 		<module>TasksIterators</module>
 		<module>Generics</module>
+		<module>ListsTask</module>
 	</modules>
 
     <build>
