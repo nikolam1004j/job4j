@@ -104,4 +104,20 @@ public class MyLinkedListTest {
         myLinkedList.remove(myLinkedList.getSize() - 1);
         iterator.next();
     }
+
+    @Test
+    public void pushAndPollTest() {
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        myLinkedList.push(3);
+        myLinkedList.push(2);
+        myLinkedList.push(1);
+
+        assertThat(myLinkedList.get(0), is(1));
+        assertThat(myLinkedList.get(1), is(2));
+        assertThat(myLinkedList.get(2), is(3));
+
+        assertThat(myLinkedList.poll(), is(1));
+        assertThat(myLinkedList.poll(), is(2));
+        assertThat(myLinkedList.poll(), is(3));
+    }
 }
