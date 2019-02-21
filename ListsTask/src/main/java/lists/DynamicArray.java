@@ -19,6 +19,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
     /**
      * Создает динамический список на базе массива емкостью startCapacity.
+     *
      * @param startCapacity Емкость списка.
      */
     public DynamicArray(int startCapacity) {
@@ -38,6 +39,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
     /**
      * Возвращает размер списка.
+     *
      * @return Размер списка.
      */
     public int size() {
@@ -46,6 +48,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
     /**
      * Возвращает емкость списка.
+     *
      * @return Емкость списка.
      */
     public int capacity() {
@@ -54,24 +57,33 @@ public class DynamicArray<E> implements Iterable<E> {
 
     /**
      * Добавляет элемент в список.
+     *
      * @param val Добавляемый элемент.
      */
     public void add(E val) {
         if (array.length == carriage) {
-            Object[]array2 = new Object[array.length + capacity];
-            System.arraycopy(array, 0, array2, 0, array.length);
-            array = array2;
-            modCount++;
-            capacity += startCapacity;
+            increaseCapacity();
         }
         array[carriage++] = val;
     }
 
     /**
+     * Увеличивает емкость списка.
+     */
+    private void increaseCapacity() {
+        Object[] array2 = new Object[array.length + startCapacity];
+        System.arraycopy(array, 0, array2, 0, array.length);
+        array = array2;
+        modCount++;
+        capacity += startCapacity;
+    }
+
+    /**
      * Возвращает элемент по индексу.
+     *
      * @param index Индекс.
-     * @throws ArrayIndexOutOfBoundsException если индекс за пределами списка.
      * @return Возвращаемый элемент.
+     * @throws ArrayIndexOutOfBoundsException если индекс за пределами списка.
      */
     public E get(int index) {
         return (E) array[index];
@@ -79,6 +91,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
     /**
      * Возвращает итератор для списка.
+     *
      * @return Итератор для списка.
      */
     @Override
