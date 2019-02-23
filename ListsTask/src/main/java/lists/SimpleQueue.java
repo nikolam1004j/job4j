@@ -29,7 +29,6 @@ public class SimpleQueue<T> {
     public void add(T val) {
         exchange(stack1, stack2);
         stack1.push(val);
-        exchange(stack2, stack1);
     }
 
     /**
@@ -38,6 +37,7 @@ public class SimpleQueue<T> {
      * @return Извлекаемый элемент.
      */
     public T poll() {
+        exchange(stack2, stack1);
         return stack1.poll();
     }
 }
