@@ -35,8 +35,9 @@ public class SimpleSet<E> implements Iterable<E> {
      * @param val Добавляемый элемент.
      */
     public void add(E val) {
-        if (contains(val)) return;
-        dynamicArray.add(val);
+        if (!contains(val)) {
+            dynamicArray.add(val);
+        }
     }
 
     /**
