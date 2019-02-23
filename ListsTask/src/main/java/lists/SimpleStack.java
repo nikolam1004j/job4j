@@ -13,7 +13,7 @@ public class SimpleStack<T> {
      * @param val Добавляемый элемент.
      */
     public void push(T val) {
-        linkedList.push(val);
+        linkedList.add(val);
     }
 
     /**
@@ -22,7 +22,7 @@ public class SimpleStack<T> {
      * @return Извлекаемый элемент.
      */
     public T poll() {
-        return linkedList.poll();
+        return linkedList.dropLast();
     }
 
     /**

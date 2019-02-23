@@ -106,18 +106,17 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void pushAndPollTest() {
+    public void dropsTest() {
         MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
-        myLinkedList.push(3);
-        myLinkedList.push(2);
-        myLinkedList.push(1);
-
-        assertThat(myLinkedList.get(0), is(1));
-        assertThat(myLinkedList.get(1), is(2));
-        assertThat(myLinkedList.get(2), is(3));
-
-        assertThat(myLinkedList.poll(), is(1));
-        assertThat(myLinkedList.poll(), is(2));
-        assertThat(myLinkedList.poll(), is(3));
+        myLinkedList.add(1);
+        myLinkedList.add(2);
+        myLinkedList.add(3);
+        myLinkedList.add(4);
+        myLinkedList.add(5);
+        assertThat(myLinkedList.dropLast(), is(5));
+        assertThat(myLinkedList.dropLast(), is(4));
+        assertThat(myLinkedList.dropLast(), is(3));
+        assertThat(myLinkedList.dropFirst(), is(1));
+        assertThat(myLinkedList.dropFirst(), is(2));
     }
 }

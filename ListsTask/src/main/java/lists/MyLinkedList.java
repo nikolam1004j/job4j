@@ -44,27 +44,21 @@ public class MyLinkedList<E> implements Iterable<E> {
     }
 
     /**
-     * Добавляет элемент в начало списка.
-     * @param val Добавляемый элемент.
+     * Извлекает элемент из начала списка с удалением.
+     *
+     * @return Извлекаемый элемент
      */
-    public void push(E val) {
-        if (size == 0) {
-            first = new Node<>(val);
-        } else {
-            Node<E> temp = first;
-            first = new Node<>(val);
-            first.next = temp;
-            temp.prev = first;
-        }
-        size++;
+    public E dropFirst() {
+        return remove(0);
     }
 
     /**
-     * Извлекает элемент из начала списка и удаляет его.
-     * @return Извлекаемый элемент.
+     * Извлекает элемент из конца списка с удалением.
+     *
+     * @return Извлекаемый элемент
      */
-    public E poll() {
-        return remove(0);
+    public E dropLast() {
+        return remove(size - 1);
     }
 
     /**
