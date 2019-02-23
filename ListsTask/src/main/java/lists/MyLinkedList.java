@@ -100,7 +100,7 @@ public class MyLinkedList<E> implements Iterable<E> {
         E result = node.date;
         if (node == first) {
             if (node.next == null) {
-                node = null;
+                first = null;
             } else {
                 node.next.prev = null;
                 first = first.next;
