@@ -41,4 +41,19 @@ public class SimpleQueueTest {
         assertThat(queue.poll(), is(5));
         assertThat(queue.poll(), is(6));
     }
+
+    @Test
+    public void queueTwoStacksTest3() {
+        SimpleQueue<Integer> queue = new SimpleQueue<>();
+        queue.add(1);
+        queue.add(2);
+        assertThat(queue.poll(), is(1));
+        queue.add(3);
+        queue.add(4);
+        assertThat(queue.poll(), is(2));
+        assertThat(queue.poll(), is(3));
+        queue.add(5);
+        assertThat(queue.poll(), is(4));
+        assertThat(queue.poll(), is(5));
+    }
 }
