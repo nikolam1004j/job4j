@@ -21,6 +21,7 @@
 		<module>Generics</module>
 		<module>ListsTask</module>
         <module>SetTasks</module>
+        <module>MapsModule</module>
     </modules>
 
     <build>
