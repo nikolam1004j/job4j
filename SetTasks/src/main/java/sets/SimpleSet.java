@@ -35,26 +35,13 @@ public class SimpleSet<E> implements Iterable<E> {
      * @param val Добавляемый элемент.
      */
     public void add(E val) {
-        if (!contains(val)) {
-            dynamicArray.add(val);
-        }
-    }
-
-    /**
-     * Проверяет, содержится ли элемент в коллекции.
-     *
-     * @param val Проверяемый элемент.
-     * @return Содержится ли элемент в коллекции.
-     */
-    public boolean contains(E val) {
-        boolean result = false;
-        for (E e : this) {
-            if (e.equals(val)) {
-                result = true;
-                break;
+        Iterator<E> iterator = iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(val)) {
+                return;
             }
         }
-        return result;
+        dynamicArray.add(val);
     }
 
     /**
