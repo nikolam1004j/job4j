@@ -100,4 +100,71 @@ public class BadListTest {
         BadList<Integer> badList = new BadList<>();
         assertThat(badList.hasCycle(first), is(true));
     }
+
+    @Test
+    public void testTwoElementsCycle() {
+        Node first = new Node(1);
+        Node two = new Node(2);
+        first.next = two;
+        two.next = first;
+
+        BadList<Integer> badList = new BadList<>();
+        assertThat(badList.hasCycle(first), is(true));
+    }
+
+    @Test
+    public void testTwoElementsHasNoCycle() {
+        Node first = new Node(1);
+        Node two = new Node(2);
+        first.next = two;
+        two.next = null;
+
+        BadList<Integer> badList = new BadList<>();
+        assertThat(badList.hasCycle(first), is(false));
+    }
+
+    @Test
+    public void testThreeElementsCycle() {
+        Node first = new Node(1);
+        Node two = new Node(2);
+        Node three = new Node(3);
+        first.next = two;
+        two.next = three;
+        three.next = first;
+
+        BadList<Integer> badList = new BadList<>();
+        assertThat(badList.hasCycle(first), is(true));
+    }
+
+    @Test
+    public void testThreeElementsHasNoCycle() {
+        Node first = new Node(1);
+        Node two = new Node(2);
+        Node three = new Node(3);
+        first.next = two;
+        two.next = three;
+        three.next = null;
+
+        BadList<Integer> badList = new BadList<>();
+        assertThat(badList.hasCycle(first), is(false));
+    }
+
+    @Test
+    public void testOneElemCycle() {
+        Node first = new Node(1);
+        first.next = first;
+
+        BadList<Integer> badList = new BadList<>();
+        assertThat(badList.hasCycle(first), is(true));
+    }
+
+    @Test
+    public void testOneElemHasNoCycle() {
+        Node first = new Node(1);
+        first.next = null;
+
+        BadList<Integer> badList = new BadList<>();
+        assertThat(badList.hasCycle(first), is(false));
+    }
+
 }
