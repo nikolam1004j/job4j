@@ -38,4 +38,5 @@ public class User {
         result = result * 31 + (birthday != null ? birthday.hashCode() : 0);
         return result;
     }
+
 }
