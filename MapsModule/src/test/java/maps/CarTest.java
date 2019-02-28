@@ -6,6 +6,15 @@ import org.junit.Test;
 public class CarTest {
 
     @Test
+    public void hashCodeTest() {
+        Car car1 = new Car("BMW", "M3", 25000.0, 250);
+        Car car2 = new Car("BMW", "M3", 25000.0, 250);
+
+        Assert.assertEquals(car1.hashCode(), car2.hashCode());
+        Assert.assertEquals(car1.hashCode(), car2.hashCode());
+    }
+
+    @Test
     public void testCar() {
         Car car1 = new Car("BMW", "M3", 25000.0, 250);
         Car car2 = new Car("BMW", "M3", 25000.0, 250);
