@@ -8,8 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
@@ -67,5 +66,18 @@ public class TreeTest {
             assertEquals(list.get(i), list2.get(i));
         }
         assertEquals(list.size(), list2.size());
+        assertFalse(tree.isBinary());
+    }
+
+    @Test
+    public void binaryTest() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(5, 6);
+        tree.add(5, 7);
+        assertTrue(tree.isBinary());
     }
 }
