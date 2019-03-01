@@ -156,9 +156,8 @@ public class MyHashMap<K,V> implements Iterable<MyHashMap.Entry> {
             }
 
             private void skipNulls() {
-                if (hasNext() && entries[innerCarriage] == null) {
+                while (hasNext() && entries[innerCarriage] == null) {
                     innerCarriage++;
-                    skipNulls();
                 }
             }
 

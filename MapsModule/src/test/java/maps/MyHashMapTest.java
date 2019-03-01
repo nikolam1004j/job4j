@@ -9,8 +9,8 @@ public class MyHashMapTest {
     @Test
     public void testMyHashMap() {
         HashMap<Integer, String> map1 = new HashMap<>();
-        map1.put(0, "Three");
-        map1.put(null, "Null");
+        map1.put(3, "Three");
+        map1.put(101010, "Ten");
 
         //Некоторые элементы будут потеряны.
         //Связано это с тем, что нет разрешения коллизий.
