@@ -46,10 +46,18 @@ public class MyHashMap<K,V> implements Iterable<MyHashMap.Entry> {
         boolean result = false;
         int index = getIndex(key);
         if (entries[index] == null) {
-            entries[index] = new Entry(key, value);
+            entries[index] = new Entry<K, V>(key, value);
             carriage++;
             result = true;
             refreshCurLoadFactor();
+        } else {
+            if (entries[index].key.hashCode() == key.hashCode()) {
+                if (entries[index].key.equals(key)) {
+                    entries[index] = new Entry<K, V>(key, value);
+                    carriage++;
+                    result = true;
+                }
+            }
         }
         return result;
     }
