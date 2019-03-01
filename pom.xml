@@ -23,6 +23,7 @@
         <module>SetTasks</module>
         <module>MapsModule</module>
         <module>TreeTasks</module>
+        <module>Part1Control</module>
     </modules>
 
     <build>
