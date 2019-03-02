@@ -1,6 +1,7 @@
 package controls;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Analize {
@@ -14,27 +15,29 @@ public class Analize {
      */
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        List<Integer> oldIndexes = previous.stream()
-                .map(value -> value.id)
-                .collect(Collectors.toList());
-        List<Integer> curIndexes = current.stream()
-                .map(value -> value.id)
-                .collect(Collectors.toList());
+        Map<Integer, User> prevUsers = previous.stream()
+                .collect(Collectors.toMap(
+                        o -> o.id, o -> o
+                ));
 
-        long added = curIndexes.stream()
-                .filter(integer -> !oldIndexes.contains(integer))
+        Map<Integer, User> curUsers = current.stream()
+                .collect(Collectors.toMap(
+                        o -> o.id, o -> o
+                ));
+
+        long added = curUsers.keySet().stream()
+                .filter(integer -> !prevUsers.keySet().contains(integer))
                 .count();
-        long deleted = oldIndexes.stream()
-                .filter(integer -> !curIndexes.contains(integer))
+
+        long deleted = prevUsers.keySet().stream()
+                .filter(integer -> !curUsers.keySet().contains(integer))
                 .count();
 
         int changed = 0;
-        for (User prevUser : previous) {
-            for (User curUser : current) {
-                if (prevUser.id == curUser.id) {
-                    if (!prevUser.name.equals(curUser.name)) {
-                        changed++;
-                    }
+        for (Map.Entry<Integer, User> entry : prevUsers.entrySet()) {
+            if (curUsers.containsKey(entry.getKey())) {
+                if (!curUsers.get(entry.getKey()).name.equals(entry.getValue().name)) {
+                    changed++;
                 }
             }
         }
@@ -80,6 +83,15 @@ public class Analize {
                 hashCode = result;
             }
             return hashCode;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", hashCode=" + hashCode +
+                    '}';
         }
     }
 
