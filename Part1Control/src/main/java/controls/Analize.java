@@ -25,26 +25,21 @@ public class Analize {
                         o -> o.id, o -> o
                 ));
 
-        long added = curUsers.keySet().stream()
-                .filter(integer -> !prevUsers.keySet().contains(integer))
-                .count();
-
-        long deleted = prevUsers.keySet().stream()
-                .filter(integer -> !curUsers.keySet().contains(integer))
-                .count();
-
-        int changed = 0;
+        int changed=0, removed=0;
         for (Map.Entry<Integer, User> entry : prevUsers.entrySet()) {
-            if (curUsers.containsKey(entry.getKey())) {
-                if (!curUsers.get(entry.getKey()).name.equals(entry.getValue().name)) {
+            User user = curUsers.remove(entry.getKey());
+            if (user == null) {
+                removed++;
+            } else {
+                if (!user.name.equals(entry.getValue().name)) {
                     changed++;
                 }
             }
         }
 
-        info.added = (int) added;
-        info.deleted = (int) deleted;
         info.changed = changed;
+        info.deleted = removed;
+        info.added = curUsers.size();
         return info;
     }
 
