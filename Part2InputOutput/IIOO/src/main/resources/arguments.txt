@@ -1,0 +1,1 @@
+-d C:\Projects\job4j -e pom.xml -o project.zip
