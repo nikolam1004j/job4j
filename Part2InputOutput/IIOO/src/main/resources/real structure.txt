@@ -1,0 +1,25 @@
+Структура папок
+C:\USERS\ADMINI~1\APPDATA\LOCAL\TEMP\JAVATEMP
+├───Folder1
+│       +~JF2554322382760403824.tmp
+│       +~JF610262420744979712.tmp
+│       ~DF86A98B2BFB7DFE74.TMP
+│
+├───Folder2
+│       +~JF2809770575131257255.tmp
+│       +~JF5593230350129658251.tmp
+│       +~JF6889774241364500431.tmp
+│
+├───Folder3
+│       DinamicDays-13.xlsx
+│       DynamicNatNewSystem-1.xlsx
+│
+├───Folder4
+│       .NETFramework,Version=v4.0.AssemblyAttributes.cs
+│
+└───Folder5
+        0853b5fb-3853-41f7-a43d-e1874dca4205.tmp.ico
+        40642b61-cf21-404a-9cfa-2f9cf098681e.tmp.ico
+        7055ee24-76a7-453c-86c2-6e7201562a4e.tmp.ico
+        91f9ada5-1006-4683-b0bb-28b0d0a4ef72.tmp.ico
+
