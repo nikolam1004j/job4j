@@ -25,7 +25,7 @@ public class Analize {
                         o -> o.id, o -> o
                 ));
 
-        int changed=0, removed=0;
+        int changed = 0, removed = 0;
         for (Map.Entry<Integer, User> entry : prevUsers.entrySet()) {
             User user = curUsers.remove(entry.getKey());
             if (user == null) {
