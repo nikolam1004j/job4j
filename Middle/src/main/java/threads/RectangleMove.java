@@ -17,7 +17,7 @@ public class RectangleMove implements Runnable {
     public void run() {
         int koefX = 1;
         int koefY = 1;
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             if ((rect.getX() == limitX - rect.getWidth() && koefX > 0) ||
                     (rect.getX() == 0 && koefX < 0)) {
                 koefX = -koefX;
@@ -31,7 +31,7 @@ public class RectangleMove implements Runnable {
             try {
                 Thread.sleep(40);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
