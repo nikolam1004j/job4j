@@ -1,12 +1,8 @@
 package iopack;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 /**
  * Класс для упаковки папок в ZIP архивы.
@@ -44,48 +40,6 @@ public class Args {
     }
 
     /**
-     * Архивирует папку.
-     * @throws IOException
-     */
-    private static void zipIt() throws IOException {
-        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(new File(output())))) {
-            LinkedList<File> fileList = new LinkedList<>();
-            File f = new File(directory());
-            if (f.exists() && f.isDirectory()) {
-                fileList.push(f);
-                do {
-                    File[] files = fileList.poll().listFiles();
-                    if (files != null) {
-                        for (File file : files) {
-                            //Если файл совпатает с ключом -e, пропускаем его.
-                            if (file.getName().equalsIgnoreCase(excule())) {
-                                continue;
-                            }
-                            if (file.isDirectory()) {
-                                fileList.push(file);
-                                zos.putNextEntry(new ZipEntry(file.getAbsolutePath().replace(directory(), "") + File.separator));
-                                zos.closeEntry();
-                            } else {
-                                zos.putNextEntry(new ZipEntry(file.getAbsolutePath().replace(directory(), "")));
-                                //После создания ZipEntry для файла, копируем в файл данные.
-                                FileInputStream in = new FileInputStream(file);
-                                byte[] buffer = new byte[1024];
-                                int len;
-                                while ((len = in.read(buffer)) >= 0)
-                                    zos.write(buffer, 0, len);
-                                in.close();
-                                zos.closeEntry();
-                            }
-                        }
-                    }
-                } while (!fileList.isEmpty());
-            }
-            zos.closeEntry();
-            zos.flush();
-        }
-    }
-
-    /**
      * Точка входа в программу.
      * @param args Аргументы.
      * @throws IOException
@@ -118,7 +72,8 @@ public class Args {
             throw new UnsupportedOperationException();
         }
 
-        //Зипуем.
-        zipIt();
+        Search search = new Search();
+        List<File> files = search.files(directory(), Arrays.asList("java", "xml"));
+        Zip.zip(output(), directory(), excule(), files);
     }
 }
