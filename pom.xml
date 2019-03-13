@@ -25,7 +25,8 @@
         <module>TreeTasks</module>
         <module>Part1Control</module>
         <module>Part2InputOutput</module>
-    </modules>
+		<module>Middle</module>
+	</modules>
 
     <build>
         <plugins>
