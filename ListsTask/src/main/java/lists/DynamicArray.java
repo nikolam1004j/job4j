@@ -34,6 +34,7 @@ public class DynamicArray<E> implements Iterable<E> {
      */
     public DynamicArray() {
         capacity = 10;
+        startCapacity = 10;
         array = new Object[capacity];
     }
 
