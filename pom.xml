@@ -26,7 +26,8 @@
         <module>Part1Control</module>
         <module>Part2InputOutput</module>
 		<module>Middle</module>
-	</modules>
+        <module>MiddleServlets</module>
+    </modules>
 
     <build>
         <plugins>
