@@ -15,30 +15,15 @@ public class Analize {
      */
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        Map<Integer, User> prevUsers = previous.stream()
-                .collect(Collectors.toMap(
-                        o -> o.id, o -> o
-                ));
-
-        Map<Integer, User> curUsers = current.stream()
-                .collect(Collectors.toMap(
-                        o -> o.id, o -> o
-                ));
-
-        int changed = 0, removed = 0;
-        for (Map.Entry<Integer, User> entry : prevUsers.entrySet()) {
-            User user = curUsers.remove(entry.getKey());
-            if (user == null) {
-                removed++;
-            } else {
-                if (!user.name.equals(entry.getValue().name)) {
-                    changed++;
-                }
+        Map<Integer, User> curUsers = current.stream().collect(Collectors.toMap(u -> u.id, u -> u));
+        for (User user : previous) {
+            User u = curUsers.remove(user.id);
+            if (u == null) {
+                info.deleted++;
+            } else if(!user.name.equals(u.name)) {
+                info.changed++;
             }
         }
-
-        info.changed = changed;
-        info.deleted = removed;
         info.added = curUsers.size();
         return info;
     }
