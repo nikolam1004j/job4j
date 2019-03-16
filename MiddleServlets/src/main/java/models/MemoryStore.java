@@ -85,7 +85,7 @@ public class MemoryStore implements Store {
         List<User> resultList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "select * from crudsrvlet.users"
+                    "select * from crudsrvlet.users order by id"
             );
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
