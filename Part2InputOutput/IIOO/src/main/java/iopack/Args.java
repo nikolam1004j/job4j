@@ -42,14 +42,14 @@ public class Args {
     /**
      * Точка входа в программу.
      * @param args Аргументы.
-     * @throws IOException
+     * @throws IOException Выбрасывается при ошибке архивации.
+     * @throws UnsupportedOperationException Выбрасывается, если задаются неправильные параметры.
      */
     public static void main(String[] args) throws IOException {
         if (args.length != 6) {
             throw new UnsupportedOperationException();
         }
 
-        //Возможные ключи.
         availableKeys = new HashSet<String>() {{
             add("-d");
             add("-e");
@@ -67,7 +67,6 @@ public class Args {
             insertedKeyValues.put(args[4].toLowerCase(), args[5]);
         }
 
-        //Если не собралось 3 ключа, программа бросает UnsupportedOperationException.
         if (insertedKeyValues.size() != 3) {
             throw new UnsupportedOperationException();
         }
