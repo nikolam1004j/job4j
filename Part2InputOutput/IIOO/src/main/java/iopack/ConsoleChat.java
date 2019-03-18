@@ -11,22 +11,22 @@ import java.util.function.Function;
  */
 public class ConsoleChat {
 
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-    private static final String LOG_FILE = "log.txt";
-    private static final String ANSWERS_FILE =
+    private final String LINE_SEPARATOR = System.getProperty("line.separator");
+    private final String LOG_FILE = "log.txt";
+    private final String ANSWERS_FILE =
             "Part2InputOutput\\IIOO\\src\\main\\resources\\answers.txt";
-    private static List<String> answers = new LinkedList<>();
-    private static SimpleDateFormat simpleDateFormat =
+    private List<String> answers = new LinkedList<>();
+    private SimpleDateFormat simpleDateFormat =
             new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss] ");
-    private static boolean pause;
-    private static boolean end;
+    private boolean pause;
+    private boolean end;
 
     /**
      * Загружает готовые ответы из файла.
      *
      * @throws IOException
      */
-    private static void loadAnswers() throws IOException {
+    private void loadAnswers() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(ANSWERS_FILE))) {
             String answer;
             while ((answer = reader.readLine()) != null) {
@@ -42,7 +42,7 @@ public class ConsoleChat {
      * @param bot     true - если сообщение от бота, false - от пользователя.
      * @throws IOException
      */
-    private static void writeLog(String message, boolean bot) {
+    private void writeLog(String message, boolean bot) {
         if (!message.isEmpty()) {
             StringBuilder sb = new StringBuilder(simpleDateFormat.format(new Date()))
                     .append(bot ? "Бот: " : "Я: ")
@@ -58,24 +58,24 @@ public class ConsoleChat {
         }
     }
 
-    private static boolean finish(String s) {
+    private boolean finish(String s) {
         writeLog(s, false);
         end = true;
         return pause = true;
     }
 
-    private static boolean stop(String s) {
+    private boolean stop(String s) {
         writeLog(s, false);
         return pause = true;
     }
 
-    private static boolean keepGoing(String s) {
+    private boolean keepGoing(String s) {
         pause = false;
         doIt(s);
         return pause;
     }
 
-    private static boolean doIt(String s) {
+    private boolean doIt(String s) {
         writeLog(s, false);
         if(!pause) {
             Random r = new Random();
@@ -87,17 +87,18 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) throws IOException {
-        loadAnswers();
+        ConsoleChat chat = new ConsoleChat();
+        chat.loadAnswers();
         Map<String, Function<String, Boolean>> map = new HashMap<>();
-        map.put("закончить", ConsoleChat::finish);
-        map.put("стоп", ConsoleChat::stop);
-        map.put("продолжить", ConsoleChat::keepGoing);
+        map.put("закончить", chat::finish);
+        map.put("стоп", chat::stop);
+        map.put("продолжить", chat::keepGoing);
 
         Scanner sc = new Scanner(System.in);
         String curCmd;
-        while (!end) {
+        while (!chat.end) {
             curCmd = sc.nextLine();
-            map.getOrDefault(curCmd, ConsoleChat::doIt).apply(curCmd);
+            map.getOrDefault(curCmd, chat::doIt).apply(curCmd);
         }
         sc.close();
     }
