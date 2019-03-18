@@ -41,8 +41,8 @@ public class MemoryStoreTest {
     @Test
     public void testDeleteById() {
         final MemoryStore memoryStore = MemoryStore.getInstance();
-        User user14 = new User(14);
-        boolean delete = memoryStore.delete(user14);
+        User user1 = new User(1);
+        boolean delete = memoryStore.delete(user1);
         assertThat(delete, is(true));
     }
 

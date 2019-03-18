@@ -7,7 +7,8 @@ import java.util.List;
 
 public class ValidateService {
     private static final ValidateService VALIDATE_SERVICE = new ValidateService();
-    private ValidateService(){
+
+    private ValidateService() {
     }
 
     public static ValidateService newInstance() {
@@ -23,7 +24,7 @@ public class ValidateService {
     public boolean update(User user) {
         boolean result = false;
         User byId = memoryStore.findById(user);
-        if(byId != null) {
+        if (byId != null) {
             result = memoryStore.update(user);
         }
         return result;
@@ -32,7 +33,7 @@ public class ValidateService {
     public boolean delete(User user) {
         boolean result = false;
         User byId = memoryStore.findById(user);
-        if(byId != null) {
+        if (byId != null) {
             result = memoryStore.delete(user);
         }
         return result;

@@ -51,7 +51,7 @@ public class UsersServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         boolean delete = validateService.delete(new User(id));
         PrintWriter pw = new PrintWriter(resp.getWriter());
-        if(delete) {
+        if (delete) {
             pw.append("Запись удалена");
         } else {
             pw.append("Ошибка удаления записи");

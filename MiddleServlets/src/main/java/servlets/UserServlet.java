@@ -16,11 +16,11 @@ public class UserServlet extends HttpServlet {
     private final ValidateService logic = ValidateService.newInstance();
 
     private final Map<String, Function<User, Boolean>> map =
-            new ConcurrentHashMap<String, Function<User, Boolean>>() {{
+            new ConcurrentHashMap<String, Function<User, Boolean>>() { {
                 put("add", logic::add);
                 put("update", logic::update);
                 put("delete", logic::delete);
-            }};
+            } };
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -42,9 +42,9 @@ public class UserServlet extends HttpServlet {
                     pw.printf("Операция %s не поддерживается", action);
                     return false;
                 }
-        ).apply(new User(name, "", "", new Date()) {{
+        ).apply(new User(name, "", "", new Date()) { {
             setId(id);
-        }});
+        } });
 
         if (result) {
             pw.printf("Операция %s прошла успешно", action);

@@ -22,17 +22,17 @@ public class UserUpdateServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         User user = validateService.findById(new User(id));
         PrintWriter pw = new PrintWriter(resp.getWriter());
-        pw.append("    <form action='"+req.getContextPath()+"/edit' method=\"post\">\n" +
-                "        id:    " + user.getId() + "<br>" +
-                "        <input type=\"hidden\" name=\"id\" value='"+user.getId()+"'>\n" +
-                "        <label for=\"name\">Имя:</label>\n" +
-                "        <input id=\"name\" type=\"text\" value='"+user.getName()+"' name=\"name\"><br>\n" +
-                "        <label for=\"login\">Логин:</label>\n" +
-                "        <input id=\"login\" type=\"text\" value='"+user.getLogin()+"' name=\"login\"><br>\n" +
-                "        <label for=\"email\">Email:</label>\n" +
-                "        <input id=\"email\" type=\"text\" value='"+user.getEmail()+"' name=\"email\"><br>\n" +
-                "        <input type=\"submit\" value=\"Send\">\n" +
-                "    </form>");
+        pw.append("    <form action='" + req.getContextPath() + "/edit' method=\"post\">\n"
+                + "        id:    " + user.getId() + "<br>"
+                + "        <input type=\"hidden\" name=\"id\" value='" + user.getId() + "'>\n"
+                + "        <label for=\"name\">Имя:</label>\n"
+                + "        <input id=\"name\" type=\"text\" value='" + user.getName() + "' name=\"name\"><br>\n"
+                + "        <label for=\"login\">Логин:</label>\n"
+                + "        <input id=\"login\" type=\"text\" value='" + user.getLogin() + "' name=\"login\"><br>\n"
+                + "        <label for=\"email\">Email:</label>\n"
+                + "        <input id=\"email\" type=\"text\" value='" + user.getEmail() + "' name=\"email\"><br>\n"
+                + "        <input type=\"submit\" value=\"Send\">\n"
+                + "    </form>");
     }
 
     @Override
@@ -42,12 +42,12 @@ public class UserUpdateServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        User user = new User(name, login, email, new Date()) {{
+        User user = new User(name, login, email, new Date()) { {
             setId(id);
-        }};
+        } };
         boolean update = validateService.update(user);
         PrintWriter pw = new PrintWriter(resp.getWriter());
-        if(update) {
+        if (update) {
             pw.append("Запись изменена.");
         } else {
             pw.append("Ошибка обновления записи.");
