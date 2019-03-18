@@ -27,6 +27,7 @@
         <module>Part2InputOutput</module>
 		<module>Middle</module>
         <module>MiddleServlets</module>
+        <module>Gistsandsoon</module>
     </modules>
 
     <build>
