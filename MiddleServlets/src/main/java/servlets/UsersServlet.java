@@ -49,13 +49,7 @@ public class UsersServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         req.setCharacterEncoding("utf-8");
         int id = Integer.parseInt(req.getParameter("id"));
-        boolean delete = validateService.delete(new User(id));
-        PrintWriter pw = new PrintWriter(resp.getWriter());
-        if (delete) {
-            pw.append("Запись удалена");
-        } else {
-            pw.append("Ошибка удаления записи");
-        }
-        pw.flush();
+        validateService.delete(new User(id));
+        resp.sendRedirect(req.getContextPath());
     }
 }

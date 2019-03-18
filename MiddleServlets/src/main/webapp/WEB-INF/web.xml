@@ -1,12 +1,12 @@
 <web-app>
     <servlet>
-        <servlet-name>Echo</servlet-name>
+        <servlet-name>EchoServlet</servlet-name>
         <servlet-class>servlets.EchoServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Echo</servlet-name>
-        <url-pattern>/echo</url-pattern>
+        <servlet-name>EchoServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>

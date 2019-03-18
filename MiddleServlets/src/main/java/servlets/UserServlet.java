@@ -24,8 +24,10 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html; charset=UTF-8");
+        req.setCharacterEncoding("utf-8");
         PrintWriter pw = new PrintWriter(resp.getWriter());
-        logic.findAll().forEach(pw::println);
+        logic.findAll().forEach(user -> pw.printf("%s<br>", user));
     }
 
     @Override

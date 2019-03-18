@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>UserCreateServlet</title>
 </head>
 <body>
-<form action='<%=String.format("%s/create", request.getContextPath())%>' method="post">
+<form action='${pageContext.servletContext.contextPath}/create' method="post">
     Добавление новой записи:<br>
     <label for="name">Имя:</label>
     <input id="name" type="text" name="name"><br>

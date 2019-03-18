@@ -18,26 +18,16 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
         int id = Integer.parseInt(req.getParameter("id"));
         User user = validateService.findById(new User(id));
-        PrintWriter pw = new PrintWriter(resp.getWriter());
-        pw.append("    <form action='" + req.getContextPath() + "/edit' method=\"post\">\n"
-                + "        id:    " + user.getId() + "<br>"
-                + "        <input type=\"hidden\" name=\"id\" value='" + user.getId() + "'>\n"
-                + "        <label for=\"name\">Имя:</label>\n"
-                + "        <input id=\"name\" type=\"text\" value='" + user.getName() + "' name=\"name\"><br>\n"
-                + "        <label for=\"login\">Логин:</label>\n"
-                + "        <input id=\"login\" type=\"text\" value='" + user.getLogin() + "' name=\"login\"><br>\n"
-                + "        <label for=\"email\">Email:</label>\n"
-                + "        <input id=\"email\" type=\"text\" value='" + user.getEmail() + "' name=\"email\"><br>\n"
-                + "        <input type=\"submit\" value=\"Send\">\n"
-                + "    </form>");
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/WEB-INF/views/UserUpdateServlet.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
+        req.setCharacterEncoding("utf-8");
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         String login = req.getParameter("login");
