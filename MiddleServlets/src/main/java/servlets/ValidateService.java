@@ -1,6 +1,7 @@
 package servlets;
 
-import models.MemoryStore;
+import models.DbStore;
+import models.Store;
 import models.User;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class ValidateService {
         return VALIDATE_SERVICE;
     }
 
-    private final MemoryStore memoryStore = MemoryStore.getInstance();
+    private final Store memoryStore = DbStore.getInstance();
 
     public boolean add(User user) {
         return memoryStore.add(user);
