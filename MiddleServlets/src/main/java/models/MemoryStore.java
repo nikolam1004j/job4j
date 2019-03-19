@@ -1,12 +1,17 @@
 package models;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+@ThreadSafe
 public class MemoryStore implements Store {
     private static final MemoryStore MEMORY_STORE = new MemoryStore();
+    @GuardedBy("this")
     private Connection connection;
 
     private MemoryStore() {
@@ -25,7 +30,7 @@ public class MemoryStore implements Store {
         return MEMORY_STORE;
     }
 
-    private boolean insertOrUpdate(User user, boolean result, String query) {
+    private synchronized boolean insertOrUpdate(User user, boolean result, String query) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -66,7 +71,7 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public boolean delete(User user) {
+    public synchronized boolean delete(User user) {
         boolean result = false;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -81,7 +86,7 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public List<User> findAll() {
+    public synchronized List<User> findAll() {
         List<User> resultList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -103,7 +108,7 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public User findById(User user) {
+    public synchronized User findById(User user) {
         User result = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
