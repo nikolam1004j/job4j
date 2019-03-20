@@ -15,6 +15,9 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
+        <c:if test="${error != null}">
+            <p style='color: white; background: red; padding: 2px;'>${error}</p>
+        </c:if>
         <c:forEach items="${users}" var="user">
             <tr>
                 <td><c:out value="${user.id}"/></td>
@@ -22,15 +25,25 @@
                 <td><c:out value="${user.login}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.createDate}"/></td>
-                <td><form action='${pageContext.servletContext.contextPath}/edit' method='get'>
-                    <input type='hidden' name='id' value='${user.id}' /><input type='submit' value='Edit' /></form>
-                </td>
-                <td><form action='${pageContext.servletContext.contextPath}/list' method='post'>
-                    <input type='hidden' name='id' value='${user.id}' /><input type='submit' value='Delete' /></form>
-                </td>
+                <c:if test="${pageContext.session.getAttribute('login') == user.login ||
+                    pageContext.session.getAttribute('role') == 'admin'}">
+                    <td>
+                        <form action='${pageContext.servletContext.contextPath}/edit' method='get'>
+                            <input type='hidden' name='id' value='${user.id}' />
+                            <input type='submit' value='Edit' />
+                        </form>
+                    </td>
+                    <c:if test="${pageContext.session.getAttribute('role') == 'admin'}">
+                        <td>
+                            <form action='${pageContext.servletContext.contextPath}/delete' method='post'>
+                                <input type='hidden' name='id' value='${user.id}' />
+                                <input type='submit' value='Delete' />
+                            </form>
+                        </td>
+                    </c:if>
+                </c:if>
             </tr>
         </c:forEach>
     </table>
-
 </body>
 </html>

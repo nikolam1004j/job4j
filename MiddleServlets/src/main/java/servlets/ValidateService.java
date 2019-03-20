@@ -1,19 +1,20 @@
 package servlets;
 
 import models.DbStore;
+import models.Role;
 import models.Store;
 import models.User;
 
 import java.util.List;
 
 public class ValidateService {
-    private static final ValidateService VALIDATE_SERVICE = new ValidateService();
+    private static final ValidateService VALIDATE = new ValidateService();
 
     private ValidateService() {
     }
 
     public static ValidateService newInstance() {
-        return VALIDATE_SERVICE;
+        return VALIDATE;
     }
 
     private final Store memoryStore = DbStore.getInstance();
@@ -46,5 +47,13 @@ public class ValidateService {
 
     public User findById(User user) {
         return memoryStore.findById(user);
+    }
+
+    public List<Role> getRoles() {
+        return memoryStore.getRoles();
+    }
+
+    public boolean updateRole(User user, int roleId) {
+        return memoryStore.updateRole(user, roleId);
     }
 }

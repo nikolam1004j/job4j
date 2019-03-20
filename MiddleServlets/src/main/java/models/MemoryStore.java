@@ -129,4 +129,14 @@ public class MemoryStore implements Store {
         }
         return result;
     }
+
+    @Override
+    public List<Role> getRoles() {
+        throw new UnsupportedOperationException("Не умею");
+    }
+
+    @Override
+    public boolean updateRole(User user, int roleId) {
+        throw new UnsupportedOperationException("Не умею");
+    }
 }
