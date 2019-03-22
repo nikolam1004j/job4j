@@ -25,17 +25,16 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
         req.setCharacterEncoding("utf-8");
-        PrintWriter pw = new PrintWriter(resp.getWriter());
+        PrintWriter pw = new PrintWriter(resp.getWriter(), true);
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         User user = new User(name, login, email, new Date());
         boolean add = validate.add(user);
         if (add) {
-            pw.append("Запись успешно добавлена.");
+            pw.println("Запись успешно добавлена.");
         } else {
-            pw.append("Ошибка добавления записи.");
+            pw.println("Ошибка добавления записи.");
         }
-        pw.flush();
     }
 }

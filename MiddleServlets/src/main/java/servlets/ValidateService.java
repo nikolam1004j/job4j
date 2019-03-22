@@ -10,9 +10,6 @@ import java.util.List;
 public class ValidateService {
     private static final ValidateService VALIDATE = new ValidateService();
 
-    private ValidateService() {
-    }
-
     public static ValidateService newInstance() {
         return VALIDATE;
     }
