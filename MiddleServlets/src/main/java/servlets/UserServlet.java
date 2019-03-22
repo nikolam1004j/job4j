@@ -13,13 +13,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 public class UserServlet extends HttpServlet {
-    private final ValidateService logic = ValidateService.newInstance();
+    private final ValidateService validate = ValidateService.newInstance();
 
     private final Map<String, Function<User, Boolean>> map =
             new ConcurrentHashMap<String, Function<User, Boolean>>() { {
-                put("add", logic::add);
-                put("update", logic::update);
-                put("delete", logic::delete);
+                put("add", validate::add);
+                put("update", validate::update);
+                put("delete", validate::delete);
             } };
 
     @Override
@@ -27,7 +27,7 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         req.setCharacterEncoding("utf-8");
         PrintWriter pw = new PrintWriter(resp.getWriter());
-        logic.findAll().forEach(user -> pw.printf("%s<br>", user));
+        validate.findAll().forEach(user -> pw.printf("%s<br>", user));
     }
 
     @Override

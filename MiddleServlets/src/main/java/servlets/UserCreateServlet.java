@@ -14,7 +14,7 @@ import java.util.Date;
  * Сервлет для создания новых записей.
  */
 public class UserCreateServlet extends HttpServlet {
-    private final ValidateService validateService = ValidateService.newInstance();
+    private final ValidateService validate = ValidateService.newInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class UserCreateServlet extends HttpServlet {
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         User user = new User(name, login, email, new Date());
-        boolean add = validateService.add(user);
+        boolean add = validate.add(user);
         if (add) {
             pw.append("Запись успешно добавлена.");
         } else {
