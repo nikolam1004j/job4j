@@ -1,5 +1,13 @@
 <web-app>
 
+    <servlet>
+        <servlet-name>JsonWorkingServlet</servlet-name>
+        <servlet-class>servlets.JsonWorkingServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>JsonWorkingServlet</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
 
 </web-app>

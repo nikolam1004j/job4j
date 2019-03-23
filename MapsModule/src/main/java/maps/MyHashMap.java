@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * @param <K> Тип данных ключа.
  * @param <V> Тип данных значения.
  */
-public class MyHashMap<K,V> implements Iterable<MyHashMap.Entry> {
+public class MyHashMap<K, V> implements Iterable<MyHashMap.Entry> {
 
     private Entry[] entries;
     private int size = 16;

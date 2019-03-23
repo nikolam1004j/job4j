@@ -23,13 +23,23 @@
         }
 
         function addRow() {
-            if(validate()) {
-                var name = $('#name').val();
-                var surname = $('#surname').val();
-                var sex = $('#sex').val();
-                var descr = $('#descr').val();
-                var lastRow = $('#table tr:last');
-                lastRow.after('<tr><td>'+name+'</td><td>'+surname+'</td><td>'+sex+'</td><td>'+descr+'</td></tr>')
+            if (validate()) {
+                var arr = $('form#myform').serializeArray();
+                var vals = {}
+                for (key in arr) {
+                    vals[arr[key].name] = arr[key].value
+                }
+
+                $.post("/html/json", {obj: JSON.stringify(vals)})
+                    .done(function () {
+                        var name = $('#name').val();
+                        var surname = $('#surname').val();
+                        var sex = $('#sex').val();
+                        var descr = $('#descr').val();
+                        var lastRow = $('#table tr:last');
+                        lastRow.after('<tr><td>' + name + '</td><td>' + surname + '</td><td>' +
+                            sex + '</td><td>' + descr + '</td></tr>');
+                    });
             }
             return false;
         }
@@ -44,7 +54,7 @@
 
 <div class="container">
     <h2>Форма</h2>
-    <form action="somefile" method="post">
+    <form id="myform" action="/html/json" method="post">
         <div class="form-group">
             <label for="name">Имя: </label>
             <input type="text" class="form-control" name="name" id="name" />
@@ -65,6 +75,7 @@
             <textarea id="descr" name="descr" class="form-control"></textarea>
         </div>
         <input type="submit" class="btn btn-default" value="Отправить" onclick="return addRow();">
+        <!--onclick="return addRow();"-->
     </form>
 </div>
 
