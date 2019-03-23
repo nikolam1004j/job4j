@@ -28,7 +28,9 @@
 		<module>Middle</module>
         <module>MiddleServlets</module>
         <module>Gistsandsoon</module>
-    </modules>
+        <module>HtmlCssJsAjax</module>
+		<module>HtmlCss</module>
+	</modules>
 
     <build>
         <plugins>
