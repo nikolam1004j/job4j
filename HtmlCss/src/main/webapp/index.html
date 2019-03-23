@@ -21,6 +21,18 @@
             }
             return result;
         }
+
+        function addRow() {
+            if(validate()) {
+                var name = $('#name').val();
+                var surname = $('#surname').val();
+                var sex = $('#sex').val();
+                var descr = $('#descr').val();
+                var lastRow = $('#table tr:last');
+                lastRow.after('<tr><td>'+name+'</td><td>'+surname+'</td><td>'+sex+'</td><td>'+descr+'</td></tr>')
+            }
+            return false;
+        }
     </script>
 </head>
 <body>
@@ -52,39 +64,24 @@
             <label for="descr">Описание: </label>
             <textarea id="descr" name="descr" class="form-control"></textarea>
         </div>
-        <input type="submit" class="btn btn-default" value="Отправить" onclick="return validate();">
+        <input type="submit" class="btn btn-default" value="Отправить" onclick="return addRow();">
     </form>
 </div>
 
 <div class="container">
     <h2>Таблица пользователей</h2>
-    <table class="table table-striped">
+    <table class="table table-striped" id="table">
         <thead>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-        </tr>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Пол</th>
+                <th>Описание</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-        </tr>
         </tbody>
     </table>
 </div>
-
 </body>
 </html>
