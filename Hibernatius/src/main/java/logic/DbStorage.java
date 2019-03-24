@@ -7,68 +7,55 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class DbStorage {
     private final SessionFactory factory = new Configuration()
             .configure().buildSessionFactory();
 
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            return command.apply(session);
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            tx.commit();
+            session.close();
+        }
+    }
+
     public List getAllTasks() {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        List items = session.createQuery("from Item order by id").list();
-        session.getTransaction().commit();
-        session.close();
-        return items;
+        return this.tx(s -> s.createQuery("from Item order by id").list());
     }
 
     public List getNotDone() {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        List items = session.createQuery("from Item where done = :done order by id")
+        return this.tx(s -> s.createQuery("from Item where done = :done order by id")
                 .setParameter("done", false)
-                .list();
-        session.getTransaction().commit();
-        session.close();
-        return items;
+                .list());
     }
 
     public boolean addNewTask(Item item) {
-        boolean result = false;
-        Session session = factory.openSession();
-        Transaction tran = session.beginTransaction();
-        try {
-            session.saveOrUpdate(item);
-            tran.commit();
-            result = true;
-        } catch (Exception ex) {
-            tran.rollback();
-        } finally {
-            session.close();
-        }
-        return result;
+        return this.tx(s -> { s.saveOrUpdate(item); return true; } );
     }
 
     public boolean setStatusDoneToItemById(int id) {
-        boolean result = false;
-        Session session = factory.openSession();
-        Transaction tran = session.beginTransaction();
-        try {
-            List list = session.createQuery("from Item where id = :id")
+        Function<Session, Boolean> func = ses -> {
+            boolean result = false;
+            List list = ses.createQuery("from Item where id = :id")
                     .setParameter("id", id)
                     .list();
 
             if (list.size() == 1) {
                 Item item = (Item) list.get(0);
                 item.setDone(true);
-                session.saveOrUpdate(item);
-                tran.commit();
+                ses.saveOrUpdate(item);
                 result = true;
             }
-        } catch (Exception ex) {
-            tran.rollback();
-        } finally {
-            session.close();
-        }
-        return result;
+            return result;
+        };
+        return tx(func);
     }
 }
