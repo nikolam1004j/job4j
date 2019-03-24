@@ -1,0 +1,17 @@
+#refresh{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+}
+
+#loading {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.invis {
+    display: none;
+}

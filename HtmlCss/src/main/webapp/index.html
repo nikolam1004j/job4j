@@ -64,6 +64,11 @@
             <input type="text" class="form-control" name="surname" id="surname" />
         </div>
         <div class="form-group">
+            <label for="country">Страна: </label>
+            <select class="form-control" name="country" id="country">
+            </select>
+        </div>
+        <div class="form-group">
             <label for="sex">Пол: </label>
             <select name="sex" id="sex" class="form-control">
                 <option>Мужской</option>
@@ -95,4 +100,13 @@
     </table>
 </div>
 </body>
+<script>
+    var countries = ['Беларусь', 'Россия', 'Армения']
+    var country = $('#country');
+    countries.sort().forEach(function (value) {
+        var option = document.createElement('option');
+        var option = new Option(value, value);
+        country.append(option)
+    })
+</script>
 </html>

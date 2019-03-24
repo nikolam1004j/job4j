@@ -1,0 +1,33 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>AllTasksServlet</servlet-name>
+        <servlet-class>servlets.AllTasksServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllTasksServlet</servlet-name>
+        <url-pattern>/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateNewTaskServlet</servlet-name>
+        <servlet-class>servlets.CreateNewTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateNewTaskServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SetTaskStatusDoneServlet</servlet-name>
+        <servlet-class>servlets.SetTaskStatusDoneServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SetTaskStatusDoneServlet</servlet-name>
+        <url-pattern>/done</url-pattern>
+    </servlet-mapping>
+
+</web-app>

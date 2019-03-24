@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="my.css" />
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Добавление новой задачи</h2>
+        <form action="/hiber/***" method="post">
+            <div class="form-group">
+                <label for="descr">Описание задачи:</label>
+                <input type="text" class="form-control" id="descr" name="descr">
+            </div>
+            <input type="submit" class="btn btn-default" value="Создать" onclick="return createNewTask();"/>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Задачи</h2>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="checkBox"
+                   onclick="getAllTasks($('#checkBox').is(':checked'))">
+            <label class="form-check-label" for="checkBox">
+                Показать все задачи
+            </label>
+        </div>
+        <table class="table table-hover" id="table">
+            <thead>
+            <tr>
+                <th>Номер задачи</th>
+                <th>Описание</th>
+                <th>Дата создания</th>
+                <th>Выполнена</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <button id="refresh" class="btn btn-default glyphicon glyphicon-refresh"
+            onclick="return getAllTasks($('#checkBox').is(':checked'));">
+    </button>
+    <img id="loading" class="invis" src="loader.gif" />
+</body>
+<script>
+    function createNewTask() {
+        var descr = $('#descr');
+        var loading = $('#loading');
+        loading.removeClass('invis');
+
+        $.post("/hiber/create", {task: descr.val()})
+            .done(function (data) {
+                if (data.trim() === 'OK') {
+                    getAllTasks($('#checkBox').is(':checked'));
+                    loading.addClass('invis');
+                    descr.val('');
+                } else {
+                    alert(data);
+                }
+            });
+
+        return false;
+    }
+
+    function setCompleteStatus(id) {
+        $.post("/hiber/done", {taskId: id})
+            .done(function (data) {
+                if (data.trim() === 'OK') {
+                    getAllTasks($('#checkBox').is(':checked'));
+                    loading.addClass('invis');
+                } else {
+                    alert(data);
+                }
+            });
+
+        return false;
+    }
+
+    function getAllTasks(everyone) {
+        var loading = $('#loading');
+        loading.removeClass('invis');
+        $.post("/hiber/all", {all: everyone})
+            .done(function (data) {
+                var array = JSON.parse(data);
+
+
+                $('#table tbody > tr').remove();
+
+                if(array.length > 0) {
+
+                    var table = $('#table tbody');
+
+                    for (k in array) {
+                        var raw = '<tr><td>' + array[k]['id'] + '</td><td>' +
+                            array[k]['descr'] + '</td><td>' +
+                            array[k]['created'] + '</td><td>';
+                        if (array[k]['done']) {
+                            raw += '<img src="done.png" /></td></tr>';
+                        } else {
+                            raw += '<input type="hidden" name="id" value="' + array[k]['id'] + '">' +
+                                '<input type="submit" class="btn btn-default" value="Завершить" ' +
+                                'onclick=\"return setCompleteStatus(' + array[k]['id'] + ');\"/></td></tr>';
+                        }
+
+                        console.log(raw)
+                        table.append(raw)
+                    }
+                }
+                loading.addClass('invis')
+            })
+        return false;
+    }
+
+    getAllTasks($('#checkBox').is(':checked'));
+</script>
+</html>
