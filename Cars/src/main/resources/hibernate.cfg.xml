@@ -1,0 +1,20 @@
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/servlets</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">pass</property>
+        <property name="default_schema">carshop</property>
+        <property name="show_sql">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL92Dialect</property>
+
+        <!--<mapping resource="models/dvigatel.cfg.xml" />-->
+        <!--<mapping resource="models/cuzov.cfg.xml" />-->
+        <!--<mapping resource="models/corobka.cfg.xml" />-->
+        <!--<mapping resource="models/car.cfg.xml" />-->
+        <mapping class="annotationsmodels.Cuzov" />
+        <mapping class="annotationsmodels.Corobka" />
+        <mapping class="annotationsmodels.Dvigatel" />
+        <mapping class="annotationsmodels.Car" />
+    </session-factory>
+</hibernate-configuration>

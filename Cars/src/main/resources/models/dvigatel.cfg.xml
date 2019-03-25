@@ -1,0 +1,9 @@
+<hibernate-mapping>
+    <class name="models.Dvigatel" table="dvigatel">
+        <id name="id">
+            <generator class="identity" />
+        </id>
+        <property name="name" column="name"/>
+        <property name="maxspeed" column="maxspeed" />
+    </class>
+</hibernate-mapping>

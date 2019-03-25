@@ -1,0 +1,8 @@
+<hibernate-mapping>
+    <class name="models.Corobka" table="corobka">
+        <id name="id">
+            <generator class="identity"/>
+        </id>
+        <property name="automatic" column="automatic" />
+    </class>
+</hibernate-mapping>

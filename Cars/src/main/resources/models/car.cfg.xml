@@ -1,0 +1,24 @@
+<hibernate-mapping>
+    <class name="models.Car" table="car">
+        <id name="id">
+            <generator class="identity" />
+        </id>
+        <property name="model" column="model" />
+
+        <many-to-one name="corobka"
+                    column="corobka_id"
+                    class="models.Corobka" />
+
+        <many-to-one name="cuzov"
+                    column="cuzov_id"
+                    class="models.Cuzov" />
+
+        <many-to-one name="dvigatel"
+                    column="dvigatel_id"
+                    class="models.Dvigatel" />
+
+        <property name="link" column="link" />
+
+
+    </class>
+</hibernate-mapping>
