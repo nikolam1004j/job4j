@@ -1,9 +1,9 @@
 package logic;
 
-import models.Car;
-import models.Corobka;
-import models.Cuzov;
-import models.Dvigatel;
+import annotationsmodels.Car;
+import annotationsmodels.Corobka;
+import annotationsmodels.Cuzov;
+import annotationsmodels.Dvigatel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -26,7 +26,7 @@ public class StoreTest {
         session.close();
 
         Store store = new Store();
-        Car mitsubishi = new Car("Mitsubishi", dvigatel, corobka, cuzov, "img/mits.jpg");
+        Car mitsubishi = new Car("Nikolay Razilov", "Mitsubishi", dvigatel, corobka, cuzov, "img/mits.jpg", 24000.0);
         store.saveOrUpdate(mitsubishi);
         List<Car> allCars = store.getAllCars();
         Car mits = allCars.stream()

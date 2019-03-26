@@ -13,4 +13,44 @@
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddNewCarServlet</servlet-name>
+        <servlet-class>servlets.AddNewCarServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddNewCarServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Autho</servlet-name>
+        <servlet-class>servlets.AuthoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Autho</servlet-name>
+        <url-pattern>/autho</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Sellout</servlet-name>
+        <servlet-class>servlets.SelloutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Sellout</servlet-name>
+        <url-pattern>/sellout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>servlets.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
 </web-app>

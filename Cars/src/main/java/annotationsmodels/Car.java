@@ -11,6 +11,9 @@ public class Car {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "owner")
+    private String owner;
+
     @Column(name = "model")
     private String model;
 
@@ -26,17 +29,27 @@ public class Car {
     @JoinColumn(name = "cuzov_id")
     private Cuzov cuzov;
 
+    @Column(name = "link")
     private String link;
+
+    @Column(name = "price")
+    private double price;
+
+    @Column(name = "sold")
+    private boolean sold;
+
 
     public Car() {
     }
 
-    public Car(String model, Dvigatel dvigatel, Corobka corobka, Cuzov cuzov, String link) {
+    public Car(String owner, String model, Dvigatel dvigatel, Corobka corobka, Cuzov cuzov, String link, double price) {
+        this.owner = owner;
         this.model = model;
         this.dvigatel = dvigatel;
         this.corobka = corobka;
         this.cuzov = cuzov;
         this.link = link;
+        this.price = price;
     }
 
     public int getId() {
@@ -45,6 +58,14 @@ public class Car {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getModel() {
@@ -85,5 +106,21 @@ public class Car {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 }

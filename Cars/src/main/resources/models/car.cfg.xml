@@ -18,6 +18,9 @@
                     class="models.Dvigatel" />
 
         <property name="link" column="link" />
+        <property name="price" column="price" />
+        <property name="sold" column="sold" />
+        <property name="owner" column="owner" />
 
 
     </class>
