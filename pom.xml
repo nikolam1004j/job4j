@@ -32,6 +32,7 @@
 		<module>Hibernatius</module>
         <module>Cars</module>
         <module>Springisgreen</module>
+        <module>Springmvcannotations</module>
     </modules>
 
     <build>
