@@ -5,25 +5,33 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd"
+       default-init-method="init" default-destroy-method="destroy">
 
-    <context:annotation-config />
+    <context:annotation-config/>
     <context:component-scan base-package="models"/>
 
     <bean class="java.sql.Timestamp" id="time" scope="prototype">
-        <constructor-arg name="time" value="#{T(System).currentTimeMillis()}" />
+        <constructor-arg name="time" value="#{T(System).currentTimeMillis()}"/>
     </bean>
 
     <bean id="user1" class="models.User">
-        <constructor-arg name="id" value="1"/>
-        <constructor-arg name="name" value="Nick" />
-        <constructor-arg name="created" ref="time" />
+        <constructor-arg name="name" value="Nick"/>
+        <constructor-arg name="created" ref="time"/>
     </bean>
 
     <bean id="user2" class="models.User">
-        <constructor-arg name="id" value="2"/>
-        <constructor-arg name="name" value="Den" />
-        <constructor-arg name="created" ref="time" />
+        <constructor-arg name="name" value="Den"/>
+        <constructor-arg name="created" ref="time"/>
     </bean>
+
+    <bean id="jdbcStorage" class="storages.JdbcStorage">
+        <property name="driver" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://127.0.0.1:5432/spring?currentSchema=storage"/>
+        <property name="user" value="postgres"/>
+        <property name="pass" value="pass"/>
+    </bean>
+
+    <bean id="memoryStorage" class="storages.MemoryStorage" />
 
 </beans>

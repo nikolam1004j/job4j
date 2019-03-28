@@ -10,11 +10,16 @@ public class Config {
 
     @Bean
     public User user3() {
-        return new User(3, "Vova", new Timestamp(System.currentTimeMillis()));
+        return new User("Vova", new Timestamp(System.currentTimeMillis()));
     }
 
     @Bean
     public User user4() {
-        return new User(4, "Petya", new Timestamp(System.currentTimeMillis()));
+        return new User("Petya", new Timestamp(System.currentTimeMillis()));
+    }
+
+    @Bean
+    public String stop() {
+        return "-stop";
     }
 }
