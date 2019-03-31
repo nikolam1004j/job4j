@@ -33,6 +33,7 @@
         <module>Cars</module>
         <module>Springisgreen</module>
         <module>Springmvcannotations</module>
+        <module>SpringData</module>
     </modules>
 
     <build>
